@@ -1,0 +1,14 @@
+<!-- res/layout/item_image.xml -->
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <!-- Si necesitas variables de datos, puedes declararlas aquí -->
+    </data>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
+
+</layout>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/darkGrey"
+    tools:context=".view.fragments.HomeFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Agrega aquí tus vistas de categorías dinámicamente -->
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Buscar por Categoria:"
+                android:textColor="#FFFFFF" />
+
+            <Spinner
+                android:id="@+id/spinnerCategoriaAuto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Buscar por modelo de vehiculo:"
+                android:textColor="#FFFFFF" />
+
+            <EditText
+                android:id="@+id/editTextText2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Escribe el modelo del vehiculo"
+                android:inputType="text"
+                android:textColorHint="#6E6E6E" />
+
+            <!--<androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvListAutos"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />-->
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvListAutos"
+                android:layout_width="478dp"
+                android:layout_height="954dp"
+                tools:listitem="@layout/item_auto"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

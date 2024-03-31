@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/btnEditarPerfil"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/darkFrey1"
+    tools:context=".view.fragments.ProfileFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <!-- Agrega tus botones aquí -->
+
+        <TextView
+            android:id="@+id/tvUsuarioActivo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="usuario y token activo"
+            android:textAlignment="center"
+            android:textColor="#1AFD00"
+            android:textSize="14sp"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/tvUsuarioInactivo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="usuario y token desactivado"
+            android:textAlignment="center"
+            android:textColor="#FF4646"
+            android:textSize="14sp"
+            android:visibility="invisible" />
+
+        <ImageView
+            android:id="@+id/ivProfilePicture"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/ic_profile_avatar"
+            tools:srcCompat="@drawable/ic_profile_avatar" />
+
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Login /Create User" />
+
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:text="Logout" />
+
+        <Button
+            android:id="@+id/btnEditarProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:text="Editar Perfil" />
+
+    </LinearLayout>
+
+</FrameLayout>

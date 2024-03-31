@@ -1,0 +1,15 @@
+<!-- res/drawable/button_background.xml -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <shape>
+            <solid android:color="#a8a8a8" /> <!-- Rosa oscuro cuando presionado -->
+            <corners android:radius="12dp" /> <!-- Esquinas redondeadas -->
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <solid android:color="#a8a8a8" /> <!-- Rosa claro por defecto -->
+            <corners android:radius="12dp" /> <!-- Esquinas redondeadas -->
+        </shape>
+    </item>
+</selector>

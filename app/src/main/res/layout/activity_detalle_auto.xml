@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.homeButton.DetalleAutoActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Descripción -->
+            <TextView
+                android:id="@+id/textViewDescripcion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Descripción"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <!-- Estado -->
+            <TextView
+                android:id="@+id/textViewEstado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Estado"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <!-- Carrusel de Imágenes -->
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="16dp" />
+
+            <!-- Kilometraje -->
+            <TextView
+                android:id="@+id/textViewKilometraje"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kilometraje"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <!-- Marca -->
+            <TextView
+                android:id="@+id/textViewMarca"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Marca"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <!-- Modelo -->
+            <TextView
+                android:id="@+id/textViewModelo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Modelo"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <!-- Motor -->
+            <TextView
+                android:id="@+id/textViewMotor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Motor"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <!-- País -->
+            <TextView
+                android:id="@+id/textViewPais"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="País"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <!-- Precio -->
+            <TextView
+                android:id="@+id/textViewPrecio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Precio"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,5 @@
+<!-- res/drawable/background.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#292929" /> <!-- Fondo gris oscuro -->
+    <corners android:radius="12dp" /> <!-- Esquinas redondeadas -->
+</shape>

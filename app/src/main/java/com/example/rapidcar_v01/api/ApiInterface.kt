@@ -9,6 +9,7 @@ import com.example.rapidcar_v01.modelo.IdCategoria
 import com.example.rapidcar_v01.modelo.Idusuario
 import com.example.rapidcar_v01.modelo.LoginRequest
 import com.example.rapidcar_v01.modelo.LoginResponse
+import com.example.rapidcar_v01.modelo.Usuario
 import com.example.rapidcar_v01.modelo.categoria_auto.Categoria_auto
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -51,7 +52,8 @@ interface ApiInterface {
     //lista todas las categorias para ser usadas en el spinner
     @GET("categoria")
     suspend fun getCategorias(): Response<Categoria_auto>
-
+    @GET("usuario/buscar_usuario")
+    suspend fun getusuario() : Response<AutoResponses<Usuario>>
 
     @GET("auto/busqueda/categoria")
     suspend fun getAutosPorCategoria(@Query("id") idCategoria: Int):

@@ -25,4 +25,11 @@ class SharedPreferencesManager(context: Context) {
     fun getSharedPreferences(): SharedPreferences {
         return sharedPreferences
     }
+
+    /*fun clearAuthToken() {
+        val editor = sharedPreferences.edit()
+        editor.remove("AuthToken")
+        editor.apply()
+        Log.d("SharedPreferencesManager", "AuthToken cleared")
+    }*/
 }

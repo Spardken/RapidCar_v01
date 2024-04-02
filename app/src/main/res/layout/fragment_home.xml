@@ -47,15 +47,28 @@
                 android:inputType="text"
                 android:textColorHint="#6E6E6E" />
 
-            <!--<androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvListAutos"
+
+            <!--<com.google.android.gms.ads.AdView
+                android:id="@+id/adView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />-->
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                app:adSize="BANNER"
+                app:adUnitId="ca-app-pub-3940256099942544/9214589741"></com.google.android.gms.ads.AdView>-->
+
+            <com.google.android.gms.ads.AdView
+                android:id="@+id/adView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                app:adSize="SMART_BANNER"
+                app:adUnitId="ca-app-pub-3940256099942544/9214589741" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvListAutos"
                 android:layout_width="478dp"
                 android:layout_height="954dp"
+                android:layout_marginTop="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

@@ -31,6 +31,12 @@
                 android:layout_height="wrap_content"
                 android:text="Agregar Auto para Venta" />
 
+            <Button
+                android:id="@+id/btnMensajesVenta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mensajes Leads" />
+
             <TextView
                 android:id="@+id/textView5"
                 android:layout_width="match_parent"
@@ -47,20 +53,6 @@
 
             </androidx.recyclerview.widget.RecyclerView>
 
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="95dp"
-                android:text="Mensajes Recibidos"
-                android:textAlignment="center"
-                android:textColor="#FFFEFE"
-                android:textSize="24sp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvMensajeVenta"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
         </LinearLayout>
     </ScrollView>
 

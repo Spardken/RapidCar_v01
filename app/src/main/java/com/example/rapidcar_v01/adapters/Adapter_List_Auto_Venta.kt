@@ -1,6 +1,6 @@
+package com.example.rapidcar_v01.adapters
 
 import android.content.Context
-import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.drawable.Drawable
@@ -15,45 +15,41 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.example.rapidcar_v01.R
-import com.example.rapidcar_v01.databinding.ItemAutoBinding
+import com.example.rapidcar_v01.databinding.ItemListAutoVentaBinding
 import com.example.rapidcar_v01.modelo.DataAuto
-import com.example.rapidcar_v01.view.homeButton.DetalleAutoActivity
+import com.example.rapidcar_v01.utils.RetrofitInstance
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class Adapter_Auto(private var data: List<DataAuto>, private val context: Context) :
-    RecyclerView.Adapter<Adapter_Auto.ViewHolder>() {
+class Adapter_List_Auto_Venta(private val context: Context) :
+    RecyclerView.Adapter<Adapter_List_Auto_Venta.ViewHolder>() {
+    private var dataList = mutableListOf<DataAuto>()
 
-
-    // Variable global para almacenar el ID del registro seleccionado
-    companion object {
-        private var selectedAutoId: Int = -1
-
-        fun getSelectedAutoId(): Int {
-            return selectedAutoId
-        }
+    init {
+        loadData()
     }
 
-
-    inner class ViewHolder(private val binding: ItemAutoBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-
-        init {
-            binding.buttonDetalleAuto.setOnClickListener {
-                val position = adapterPosition
-                if (position != RecyclerView.NO_POSITION) {
-                    val item = data[position]
-                    selectedAutoId =
-                        item.idAuto // Actualizar selectedAutoId con el ID del auto seleccionado
-                    val intent = Intent(context, DetalleAutoActivity::class.java)
-                    intent.putExtra("data_auto_id", item.idAuto) // Pasar el ID del auto
-                    context.startActivity(intent)
-                }
-            }
+    private fun loadData() {
+    CoroutineScope(Dispatchers.Main).launch {
+        // Cambiar la respuesta a AutoResponsesList<DataAuto>
+        val response = RetrofitInstance.api.listarAutoUsuario()
+        if (response.isSuccessful && response.body() != null) {
+            // Como data es una lista, puedes asignarla directamente a dataList
+            dataList = response.body()!!.data.toMutableList()
+            notifyDataSetChanged()
+        } else {
+            // Manejar el error
         }
+    }
+}
 
+    inner class ViewHolder(private val binding: ItemListAutoVentaBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(item: DataAuto) {
             binding.apply {
                 // Log de la cadena Base64 antes de decodificarla (para debugging)
-                Log.d("Adapter_Auto", "Cadena Base64 antes de decodificar: ${item.img1}")
+                Log.d("Adapter_Auto_Venta", "Cadena Base64 antes de decodificar: ${item.img1}")
 
                 // Decodificar la cadena Base64 en un Bitmap
                 val decodedBytes: ByteArray = Base64.decode(item.img1, Base64.DEFAULT)
@@ -61,7 +57,7 @@ class Adapter_Auto(private var data: List<DataAuto>, private val context: Contex
                     BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size)
 
                 // Cargar la imagen con Glide utilizando el Bitmap decodificado
-                Glide.with(autoImageView.context)
+                Glide.with(binding.autoImageViewVenta.context)
                     .load(bitmap)
                     .placeholder(R.drawable.ic_picture_avatar)
                     .error(R.drawable.baseline_error_24)
@@ -88,42 +84,34 @@ class Adapter_Auto(private var data: List<DataAuto>, private val context: Contex
                             return false
                         }
                     })
-                    .into(autoImageView)
+                    .into(binding.autoImageViewVenta)
 
-                modeloTextView.text = "Modelo: ${item.modelo}"
-                kilometrajeTextView.text = "Km: ${item.kilometraje}"
-                marcaTextView.text = "Marca: ${item.marca}"
-                precioTextView.text = "Precio: ${item.precio}"
+                binding.modeloTextViewVenta.text = "Modelo: ${item.modelo}"
+                binding.kilometrajeTextViewVenta.text = "Km: ${item.kilometraje}"
+                binding.marcaTextViewVenta.text = "Marca: ${item.marca}"
+                binding.precioTextViewVenta.text = "Precio: ${item.precio}"
             }
         }
     }
 
-
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    )
-            : ViewHolder {
-        val binding = ItemAutoBinding.inflate(LayoutInflater.from(parent.context),
-            parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val binding =
+            ItemListAutoVentaBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
-    override fun getItemCount(): Int {
-        return data.size
-    }
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val currentItem = data[position]
+        val currentItem = dataList[position]
         holder.bind(currentItem)
     }
 
-    // Método para actualizar los datos del adaptador
-    fun updateData(newData: List<DataAuto>) {
-        data = newData
-        notifyDataSetChanged()
+    override fun getItemCount(): Int {
+        return dataList.size
     }
 
-
+    fun updateDataVenta(newData: List<DataAuto>) {
+        dataList = newData.toMutableList()
+        notifyDataSetChanged()
+    }
 }
 

@@ -53,6 +53,14 @@ android {
 }
 
 dependencies {
+    //Fragment para la animaciones
+    implementation ("com.github.bumptech.glide:glide:4.12.0")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.6.0")
+    implementation("androidx.navigation:navigation-ui-ktx:2.6.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
+    //admob
+    implementation ("com.google.android.gms:play-services-ads:20.5.0")
+
 
 
     //Fragment, DataBinding, and ViewBinding libraries

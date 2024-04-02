@@ -16,8 +16,12 @@ import com.example.rapidcar_v01.modelo.DataAuto
 import com.example.rapidcar_v01.modelo.categoria_auto.Data
 import com.example.rapidcar_v01.utils.RetrofitInstance
 import kotlinx.coroutines.launch
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
+
 import retrofit2.HttpException
 import java.io.IOException
+
 
 class HomeFragment : Fragment() {
 
@@ -68,6 +72,15 @@ class HomeFragment : Fragment() {
                     // No hacer nada
                 }
             }
+
+        // Inicializa Mobile Ads
+        MobileAds.initialize(requireContext()) {}
+
+        // Carga un anuncio en el AdView
+        val adRequest = AdRequest.Builder().build()
+        binding.adView.loadAd(adRequest)
+
+        // ...
 
         return rootView
     }

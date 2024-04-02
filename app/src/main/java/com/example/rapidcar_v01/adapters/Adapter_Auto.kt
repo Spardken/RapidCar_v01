@@ -1,3 +1,4 @@
+
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
@@ -125,3 +126,4 @@ class Adapter_Auto(private var data: List<DataAuto>, private val context: Contex
 
 
 }
+

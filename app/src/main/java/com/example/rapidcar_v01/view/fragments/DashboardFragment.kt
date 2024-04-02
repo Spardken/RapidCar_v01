@@ -11,10 +11,12 @@ import com.example.rapidcar_v01.adapters.Adapter_List_Auto_Venta
 import com.example.rapidcar_v01.databinding.FragmentDashboardBinding
 import com.example.rapidcar_v01.modelo.DataAuto
 import com.example.rapidcar_v01.view.dashboardButton.AgregarActualizarAutoActivity
+import com.example.rapidcar_v01.view.dashboardButton.MensajesLeadsActivity
 
 class DashboardFragment : Fragment() {
 
     private var _binding: FragmentDashboardBinding? = null
+
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
@@ -44,7 +46,13 @@ class DashboardFragment : Fragment() {
             val intent = Intent(activity, AgregarActualizarAutoActivity::class.java)
             startActivity(intent)
         }
+
+        binding.btnMensajesVenta.setOnClickListener {
+            val intent = Intent(activity, MensajesLeadsActivity::class.java)
+            startActivity(intent)
+        }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

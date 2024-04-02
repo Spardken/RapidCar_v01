@@ -54,6 +54,10 @@ android {
 
 dependencies {
 
+    //admob
+    implementation ("com.google.android.gms:play-services-ads:20.5.0")
+
+
 
     //Fragment, DataBinding, and ViewBinding libraries
     implementation("androidx.fragment:fragment-ktx:1.3.6")

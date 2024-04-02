@@ -76,9 +76,9 @@ class LoginActivity : AppCompatActivity() {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
-    private fun registrarAuto() {
+   /* private fun registrarAuto() {
         // Llamar a la actividad para agregar o actualizar un vehículo
         val intent = Intent(this, AgregarActualizarAutoActivity::class.java)
         startActivity(intent)
-    }
+    }*/
 }

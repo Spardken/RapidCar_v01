@@ -22,6 +22,9 @@
             android:name=".view.dashboardButton.MensajesLeadsActivity"
             android:exported="false" />
         <activity
+            android:name=".view.fragments.UserPerfileFragment"
+            android:exported="false" />
+        <activity
             android:name=".view.dashboardButton.AgregarActualizarAutoActivity"
             android:exported="false" />
         <activity

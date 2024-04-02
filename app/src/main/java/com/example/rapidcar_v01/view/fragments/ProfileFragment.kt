@@ -28,6 +28,11 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
+        binding.btnEditarProfile.setOnClickListener{
+            val intent = Intent(activity,UserPerfileFragment::class.java)
+            startActivity(intent)
+        }
+
     val sharedPreferencesManager = SharedPreferencesManager(requireContext())
     val sharedPreferences = sharedPreferencesManager.getSharedPreferences()
 
@@ -106,6 +111,11 @@ class ProfileFragment : Fragment() {
         val sharedPreferencesManager = SharedPreferencesManager(requireContext())
         val sharedPreferences = sharedPreferencesManager.getSharedPreferences()
 
+
+        binding.btnEditarProfile.setOnClickListener{
+            val intent = Intent(activity,UserPerfileFragment::class.java)
+            startActivity(intent)
+        }
         // Actualizar la visibilidad de los TextViews basado en si el token es nulo o no
         fun updateTextViews() {
             _binding?.let {

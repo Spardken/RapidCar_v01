@@ -40,7 +40,8 @@ class Adapter_Auto(private var data: List<DataAuto>, private val context: Contex
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     val item = data[position]
-                    selectedAutoId = item.idAuto // Actualizar selectedAutoId con el ID del auto seleccionado
+                    selectedAutoId =
+                        item.idAuto // Actualizar selectedAutoId con el ID del auto seleccionado
                     val intent = Intent(context, DetalleAutoActivity::class.java)
                     intent.putExtra("data_auto_id", item.idAuto) // Pasar el ID del auto
                     context.startActivity(intent)
@@ -97,8 +98,13 @@ class Adapter_Auto(private var data: List<DataAuto>, private val context: Contex
     }
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemAutoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    )
+            : ViewHolder {
+        val binding = ItemAutoBinding.inflate(LayoutInflater.from(parent.context),
+            parent, false)
         return ViewHolder(binding)
     }
 
@@ -117,12 +123,5 @@ class Adapter_Auto(private var data: List<DataAuto>, private val context: Contex
         notifyDataSetChanged()
     }
 
-    // Método para obtener el ID del registro seleccionado
-    fun getSelectedAutoId(): Int {
-        return selectedAutoId
-    }
 
-    fun getAutoById(autoId: Int): DataAuto? {
-        return data.firstOrNull { it.idAuto == autoId }
-    }
 }

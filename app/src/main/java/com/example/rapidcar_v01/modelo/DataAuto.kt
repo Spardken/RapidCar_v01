@@ -66,6 +66,16 @@ data class AutoResponses<T>(
     val data: T
 )
 
+
+
+//changed
+data class AutoResponsesList<T>(
+    val estado: String,
+    val mensaje: String,
+    @SerializedName("data")
+    val data: List<T>
+)
+
 data class DataAuto(
     @SerializedName("idAuto")
     val idAuto: Int,

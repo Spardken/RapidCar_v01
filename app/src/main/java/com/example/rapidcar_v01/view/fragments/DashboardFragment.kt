@@ -6,7 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.rapidcar_v01.adapters.Adapter_List_Auto_Venta
 import com.example.rapidcar_v01.databinding.FragmentDashboardBinding
+import com.example.rapidcar_v01.modelo.DataAuto
 import com.example.rapidcar_v01.view.dashboardButton.AgregarActualizarAutoActivity
 
 class DashboardFragment : Fragment() {
@@ -15,12 +18,23 @@ class DashboardFragment : Fragment() {
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
+    private lateinit var adapterAutoVenta: Adapter_List_Auto_Venta
+
+    private var dataList: List<DataAuto> = emptyList()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
+        setupRecyclerViewVenta()
         return binding.root
+    }
+
+    private fun setupRecyclerViewVenta() {
+        binding.rvAutoVenta.layoutManager = LinearLayoutManager(requireContext())
+        adapterAutoVenta = Adapter_List_Auto_Venta(requireContext()) // Aquí se pasa el contexto
+        binding.rvAutoVenta.adapter = adapterAutoVenta
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,5 +49,9 @@ class DashboardFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun actualizarRecyclerViewVenta() {
+        adapterAutoVenta.updateDataVenta(dataList)
     }
 }

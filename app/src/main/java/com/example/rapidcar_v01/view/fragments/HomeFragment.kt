@@ -80,11 +80,7 @@ class HomeFragment : Fragment() {
     }
 
 
-    /*private fun configurarRecyclerView() {
-        binding.rvListAutos.layoutManager = LinearLayoutManager(requireContext())
-        adapterAuto = Adapter_Auto(emptyList())
-        binding.rvListAutos.adapter = adapterAuto
-    }*/
+
 
     private fun obtenerCategorias() {
     lifecycleScope.launch {

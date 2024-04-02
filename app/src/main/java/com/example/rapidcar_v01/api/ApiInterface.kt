@@ -3,6 +3,7 @@ package com.example.rapidcar_v01.api
 import com.example.rapidcar_v01.modelo.AutoE
 import com.example.rapidcar_v01.modelo.AutoResponse
 import com.example.rapidcar_v01.modelo.AutoResponses
+import com.example.rapidcar_v01.modelo.AutoResponsesList
 import com.example.rapidcar_v01.modelo.DataAuto
 import com.example.rapidcar_v01.modelo.IdCategoria
 import com.example.rapidcar_v01.modelo.Idusuario
@@ -81,6 +82,10 @@ interface ApiInterface {
         @Part("estatus") estatus: RequestBody
         //@Header("Authorization") token: String  // Agrega este parámetro para el token
     ): Response<AutoResponses<DataAuto>>
+
+
+    @GET("auto/listarAuto/usuario")
+    suspend fun listarAutoUsuario(): Response<AutoResponsesList<DataAuto>>
 
 
 

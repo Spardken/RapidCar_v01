@@ -70,7 +70,10 @@ class DetalleAutoActivity : AppCompatActivity() {
                     val autoResponse: AutoResponses<DataAuto>? = response.body()
 
                     if (autoResponse != null && autoResponse.estado == "Ok") {
+
+                        //changed
                         val selectedAuto: DataAuto? = autoResponse.data
+                        //val selectedAuto: DataAuto? = autoResponse.data.firstOrNull()
 
                         if (selectedAuto != null) {
                             Log.d(

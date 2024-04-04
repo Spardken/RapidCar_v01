@@ -20,6 +20,7 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Part
 import retrofit2.http.Query
 
@@ -41,6 +42,21 @@ interface ApiInterface {
         @Part("celular") celular: RequestBody,
         @Part("username") username: RequestBody,
         @Part("pais") pais: RequestBody,
+    ): Call<Void>
+
+
+
+    @Multipart
+    @PUT("usuario/actualizar_usuario")
+    fun ActualizarUsuario(
+        @Part img: MultipartBody.Part?, // Cambia el tipo de parámetro a MultipartBody.Part
+        @Part("nombre") nombre: RequestBody,
+        @Part("apellido_Paterno") apellidoPaterno: RequestBody,
+        @Part("apellido_Materno") apellidoMaterno: RequestBody,
+        @Part("correo_electronico") correoElectronico: RequestBody,
+        @Part("contrasena") contrasena: RequestBody,
+        @Part("celular") celular: RequestBody,
+        @Part("username") username: RequestBody
     ): Call<Void>
 
 

@@ -1,10 +1,12 @@
 package com.example.rapidcar_v01.view.fragments
 
+import android.content.Intent
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Base64
 import android.util.Log
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.rapidcar_v01.R
@@ -13,6 +15,7 @@ import com.example.rapidcar_v01.modelo.AutoResponses
 import com.example.rapidcar_v01.modelo.Usuario
 import com.example.rapidcar_v01.tokenmanager.SharedPreferencesManager
 import com.example.rapidcar_v01.utils.RetrofitInstance
+import com.example.rapidcar_v01.view.profileButton.UpdatePerfileActivity
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -31,12 +34,16 @@ class UserPerfileFragment : AppCompatActivity() {
     private lateinit var usernameTextView: TextView
 
     private lateinit var sharedPreferencesManager: SharedPreferencesManager
-    private lateinit var apiInterface: ApiInterface
+    private lateinit var btnEdit : Button
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_perfile_fragment)
+
+        // Inicializa RetrofitInstance aquí
+        RetrofitInstance.initialize(this)
 
         sharedPreferencesManager = SharedPreferencesManager(this)
 
@@ -47,6 +54,13 @@ class UserPerfileFragment : AppCompatActivity() {
         correoelectronicoTextView = findViewById(R.id.editTextCorreoElectronico)
         celularTextView = findViewById(R.id.editTextCelular)
         usernameTextView = findViewById(R.id.editTextUsername)
+        btnEdit = findViewById(R.id.btnUpdatePerfile)
+
+        btnEdit.setOnClickListener{
+            val intent = Intent(applicationContext,UpdatePerfileActivity::class.java)
+            startActivity(intent)
+        }
+
 
         val exceptionHandler = CoroutineExceptionHandler { _, exception ->
             Log.e("UserPerfile", "Error en la coroutine", exception)

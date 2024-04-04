@@ -24,13 +24,11 @@ import com.example.rapidcar_v01.modelo.Idusuario
 import com.example.rapidcar_v01.utils.RetrofitInstance
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.HttpException
 import retrofit2.Response
-import java.io.File
 
 import android.util.Base64
 import java.io.ByteArrayOutputStream

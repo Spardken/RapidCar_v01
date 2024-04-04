@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,121 +8,136 @@
     tools:context=".view.profileButton.CreateUserActivity">
 
 
-    <TextView
-        android:id="@+id/textViewTitleCreateUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Crear Usuario"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-
-    <EditText
-        android:id="@+id/editTextNombreNewUser"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="30dp"
-        android:hint="Nombre" />
-
-    <EditText
-        android:id="@+id/editTextApellidoPaternoNewUser"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="30dp"
-        android:hint="Apellido Paterno" />
-
-    <EditText
-        android:id="@+id/editTextApellidoMaternoNewUser"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="30dp"
-        android:hint="Apellido Materno" />
-
-    <EditText
-        android:id="@+id/editTextCorreoElectronicoNewUser"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="30dp"
-        android:hint="Correo Electronico" />
-
-    <EditText
-        android:id="@+id/editTextCelularNewUser"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="30dp"
-        android:hint="Celular"
-        android:inputType="number"/>
-
-    <EditText
-        android:id="@+id/editTextPaisNewUser"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="30dp"
-        android:hint="Pais" />
-
-    <EditText
-        android:id="@+id/editTextUsernameNewUser"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="30dp"
-        android:hint="Username" />
-
-    <EditText
-        android:id="@+id/editTextContrasenaNewUser"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="30dp"
-        android:hint="Contrasena"
-        android:password="true" />
-
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/imageViewFotoPerfilNewUser"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginEnd="10dp"
-            android:src="@drawable/ic_picture_avatar" />
-
-        <Button
-            android:id="@+id/buttonSelectImageNewUser"
+        <TextView
+            android:id="@+id/textViewTitleCreateUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:text="Seleccionar Imagen" />
+            android:layout_marginTop="16dp"
+            android:text="Crear Usuario"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
+        <EditText
+            android:id="@+id/editTextNombreNewUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="30dp"
+            android:hint="Nombre" />
+
+        <EditText
+            android:id="@+id/editTextApellidoPaternoNewUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="30dp"
+            android:hint="Apellido Paterno" />
+
+        <EditText
+            android:id="@+id/editTextApellidoMaternoNewUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="30dp"
+            android:hint="Apellido Materno" />
+
+        <EditText
+            android:id="@+id/editTextCorreoElectronicoNewUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="30dp"
+            android:hint="Correo Electronico" />
+
+        <EditText
+            android:id="@+id/editTextCelularNewUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="30dp"
+            android:hint="Celular"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/editTextPaisNewUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="30dp"
+            android:hint="Pais" />
+
+        <EditText
+            android:id="@+id/editTextUsernameNewUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="30dp"
+            android:hint="Username" />
+
+        <EditText
+            android:id="@+id/editTextContrasenaNewUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="30dp"
+            android:hint="Contrasena"
+            android:password="true" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageViewFotoPerfilNewUser"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/ic_picture_avatar" />
+
+            <Button
+                android:id="@+id/buttonSelectImageNewUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="Seleccionar Imagen" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/buttonCrearUsuarioNewUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginRight="30dp"
+            android:text="Crear Usuario" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/buttonCrearUsuarioNewUser"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginRight="30dp"
-        android:text="Crear Usuario" />
-
-
-</LinearLayout>
+    <ImageView
+        android:id="@+id/imageViewCarga"
+        android:layout_width="146dp"
+        android:layout_height="122dp"
+        android:layout_gravity="center"
+        android:src="@drawable/loading"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

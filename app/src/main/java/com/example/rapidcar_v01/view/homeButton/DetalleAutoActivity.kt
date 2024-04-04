@@ -1,10 +1,14 @@
 package com.example.rapidcar_v01.view.homeButton
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
+import com.bumptech.glide.Glide
 import com.example.rapidcar_v01.R
 import com.example.rapidcar_v01.adapters.ImageCarruselAdapterList
 import com.example.rapidcar_v01.api.ApiInterface
@@ -32,6 +36,8 @@ class DetalleAutoActivity : AppCompatActivity() {
     private lateinit var idAutoTextView: TextView
     private lateinit var usernameSellerTextView: TextView
 
+    private lateinit var animacion : ImageView
+
     private lateinit var apiInterface: ApiInterface
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,6 +59,8 @@ class DetalleAutoActivity : AppCompatActivity() {
         paisTextView = findViewById(R.id.textViewPais)
         precioTextView = findViewById(R.id.textViewPrecio)
         viewPager = findViewById(R.id.viewPager)
+        animacion = findViewById(R.id.imageViewCarga)
+
 
 
         val idAuto = Adapter_Auto.getSelectedAutoId()
@@ -67,6 +75,11 @@ class DetalleAutoActivity : AppCompatActivity() {
 
         // Llamar al método getAutoDetails dentro de una coroutine
         CoroutineScope(Dispatchers.Main + exceptionHandler).launch {
+            // Mostrar animación de carga al inicio de la operación
+            Glide.with(applicationContext)
+                .asGif()
+                .load(R.drawable.loading)
+                .into(animacion)
             try {
                 val response: Response<AutoResponses<DataAuto>> =
                     apiInterface.getAutoDetails(idAuto)
@@ -109,6 +122,9 @@ class DetalleAutoActivity : AppCompatActivity() {
                 }
             } catch (e: Exception) {
                 Log.e("DetalleAutoActivity", "Error al realizar la llamada a la API", e)
+            } finally {
+                // Ocultar animación de carga después de completar la operación
+                animacion.visibility = View.GONE
             }
         }
     }

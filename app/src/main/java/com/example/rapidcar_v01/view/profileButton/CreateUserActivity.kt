@@ -31,6 +31,8 @@ import retrofit2.HttpException
 import retrofit2.Response
 
 import android.util.Base64
+import android.view.View
+import com.bumptech.glide.Glide
 import java.io.ByteArrayOutputStream
 
 class CreateUserActivity : AppCompatActivity() {
@@ -38,6 +40,7 @@ class CreateUserActivity : AppCompatActivity() {
     private lateinit var apiInterface: ApiInterface
     private var selectedImageUri: Uri? = null
     private lateinit var usuario: Idusuario
+    private lateinit var animacion : ImageView
 
     private val resultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -63,6 +66,8 @@ class CreateUserActivity : AppCompatActivity() {
 
         apiInterface = RetrofitInstance.api
 
+        animacion = findViewById(R.id.imageViewCarga)
+
         // Inicializa RetrofitInstance aquí
         RetrofitInstance.initialize(this)
 
@@ -82,6 +87,11 @@ class CreateUserActivity : AppCompatActivity() {
                 openImagePicker()
             }
         }
+
+        Glide.with(applicationContext)
+            .asGif()
+            .load(R.drawable.loading)
+            .into(animacion)
 
         val buttonCrearUsuario = findViewById<Button>(R.id.buttonCrearUsuarioNewUser)
         buttonCrearUsuario.setOnClickListener {
@@ -223,6 +233,7 @@ class CreateUserActivity : AppCompatActivity() {
     }*/
 
     private fun registrarUsuario(usuario: Idusuario, img: MultipartBody.Part?) {
+        animacion.visibility = View.VISIBLE
         // Log user fields
         Log.d("API_REQUEST", "Usuario: $usuario")
         Log.d("API_REQUEST", "Nombre: ${usuario.nombre}")
@@ -265,25 +276,30 @@ class CreateUserActivity : AppCompatActivity() {
                         "Usuario registrado exitosamente",
                         Toast.LENGTH_SHORT
                     ).show()
+                    animacion.visibility = View.GONE
                 } else {
                     // Capture the response body when the status code is 403
                     if (response.code() == 403) {
                         val errorBody = response.errorBody()?.string()
                         Log.e("API_CALL_ERROR", "Error 403: $errorBody")
+                        animacion.visibility = View.GONE
                     }
                     Toast.makeText(
                         this@CreateUserActivity,
                         "Error en el registro: ${response.message()}",
                         Toast.LENGTH_SHORT
                     ).show()
+                    animacion.visibility = View.GONE
                 }
             }
 
             override fun onFailure(call: Call<Void>, t: Throwable) {
                 Log.e("API_CALL_ERROR", "Error de conexión: ${t.message}")
+                animacion.visibility = View.GONE
 
                 if (t is HttpException) {
                     Log.e("API_CALL_ERROR", "Código de respuesta: ${t.code()}")
+                    animacion.visibility = View.GONE
                 }
 
                 // Show a Toast with the error message
@@ -292,6 +308,7 @@ class CreateUserActivity : AppCompatActivity() {
                     "Error al enviar la petición: ${t.message}",
                     Toast.LENGTH_LONG
                 ).show()
+                animacion.visibility = View.GONE
             }
         })
     }

@@ -14,6 +14,7 @@ import android.provider.MediaStore
 import android.text.Editable
 import android.util.Base64
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -21,6 +22,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.bumptech.glide.Glide
 import com.example.rapidcar_v01.R
 import com.example.rapidcar_v01.databinding.ActivityUpdatePerfileBinding
 import com.example.rapidcar_v01.modelo.AutoResponses
@@ -56,7 +58,7 @@ class UpdatePerfileActivity : AppCompatActivity() {
     private lateinit var username: EditText
     private lateinit var sharedPreferencesManager: SharedPreferencesManager
     private lateinit var usuario: UsuarioUpdate
-
+    private lateinit var animacion : ImageView
 
     private val resultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -115,6 +117,7 @@ class UpdatePerfileActivity : AppCompatActivity() {
         celular = binding.txtPhoneUpdate
         password = binding.txtPasswordUpdate
         username = binding.txtUsernameUpdate
+        animacion = findViewById(R.id.imageViewCarga)
 
         val exceptionHandler = CoroutineExceptionHandler { _, exception ->
             Log.e("UserPerfile", "Error en la coroutine", exception)
@@ -127,6 +130,10 @@ class UpdatePerfileActivity : AppCompatActivity() {
             val api = RetrofitInstance.api
 
             CoroutineScope(Dispatchers.Main + exceptionHandler).launch {
+                Glide.with(applicationContext)
+                    .asGif()
+                    .load(R.drawable.loading)
+                    .into(animacion)
                 try {
                     // Hacer la llamada a la API con el token en el encabezado de autorización
                     val response: Response<AutoResponses<Usuario>> =
@@ -164,6 +171,9 @@ class UpdatePerfileActivity : AppCompatActivity() {
                     }
                 } catch (e: Exception) {
                     Log.e("UserPerfileFragment", "Error al realizar la llamada a la API", e)
+                } finally {
+                    // Ocultar animación de carga después de completar la operación
+                    animacion.visibility = View.GONE
                 }
             }
         }
@@ -293,7 +303,7 @@ class UpdatePerfileActivity : AppCompatActivity() {
 
 
     private fun updateuser(usuario: UsuarioUpdate, img: MultipartBody.Part?) {
-
+        animacion.visibility = View.VISIBLE
         Log.d("API_REQUEST", "Usuario: $usuario")
         Log.d("API_REQUEST", "Nombre: ${usuario.nombre}")
         Log.d("API_REQUEST", "Apellido Paterno: ${usuario.apellido_Paterno}")
@@ -331,6 +341,7 @@ class UpdatePerfileActivity : AppCompatActivity() {
                             "Usuario actualizado exitosamente",
                             Toast.LENGTH_SHORT
                         ).show()
+                        animacion.visibility = View.GONE
                     } else {
                         // Capture the response body when the status code is 403
                         if (response.code() == 403) {

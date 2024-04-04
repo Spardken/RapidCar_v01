@@ -7,6 +7,7 @@
     tools:context=".view.homeButton.DetalleAutoActivity">
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="16dp"
@@ -57,13 +58,16 @@
                 android:textStyle="bold" />
 
             <!-- Carrusel de Imágenes -->
+
+            <!-- Kilometraje -->
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewPager"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:layout_marginTop="16dp" />
+                android:layout_marginTop="16dp">
 
-            <!-- Kilometraje -->
+            </androidx.viewpager2.widget.ViewPager2>
+
             <TextView
                 android:id="@+id/textViewKilometraje"
                 android:layout_width="match_parent"
@@ -118,8 +122,19 @@
                 android:textStyle="bold" />
 
 
-
         </LinearLayout>
     </ScrollView>
+
+    <ImageView
+        android:id="@+id/imageViewCarga"
+        android:layout_width="146dp"
+        android:layout_height="122dp"
+        android:layout_gravity="center"
+        android:src="@drawable/loading"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

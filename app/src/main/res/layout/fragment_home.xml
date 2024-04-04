@@ -78,4 +78,12 @@
         </LinearLayout>
     </ScrollView>
 
+    <ImageView
+        android:id="@+id/imageViewCarga"
+        android:layout_width="146dp"
+        android:layout_height="122dp"
+        android:layout_gravity="center"
+        android:src="@drawable/loading"
+        android:visibility="visible" />
+
 </FrameLayout>

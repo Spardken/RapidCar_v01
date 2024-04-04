@@ -11,6 +11,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.example.rapidcar_v01.R
 import com.example.rapidcar_v01.databinding.FragmentHomeBinding
 import com.example.rapidcar_v01.modelo.DataAuto
 import com.example.rapidcar_v01.modelo.categoria_auto.Data
@@ -96,6 +98,12 @@ class HomeFragment : Fragment() {
 
 
     private fun obtenerCategorias() {
+        // Mostrar animación de carga al inicio de la operación
+        Glide.with(requireContext())
+            .asGif()
+            .load(R.drawable.loading)
+            .into(binding.imageViewCarga)
+
     lifecycleScope.launch {
         try {
             val responseCategorias = RetrofitInstance.api.getCategorias()
@@ -130,6 +138,7 @@ class HomeFragment : Fragment() {
 }
 
     private fun obtenerAutosPorCategoria(idCategoria: Int) {
+        binding.imageViewCarga.visibility = View.VISIBLE
         lifecycleScope.launch {
             try {
                 val responseAutos = RetrofitInstance.api.getAutosPorCategoria(idCategoria)
@@ -149,6 +158,9 @@ class HomeFragment : Fragment() {
                 }
             } catch (e: Exception) {
                 mostrarToast("Error: ${e.message}")
+            } finally {
+                // Ocultar animación de carga después de completar la operación
+                binding.imageViewCarga.visibility = View.GONE
             }
         }
     }

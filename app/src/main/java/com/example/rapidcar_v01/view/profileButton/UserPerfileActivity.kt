@@ -7,10 +7,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Base64
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.example.rapidcar_v01.R
 import com.example.rapidcar_v01.api.ApiInterface
 import com.example.rapidcar_v01.modelo.AutoResponses
@@ -35,7 +37,7 @@ class UserPerfileActivity : AppCompatActivity() {
     private lateinit var correoelectronicoTextView: TextView
     private lateinit var celularTextView: TextView
     private lateinit var usernameTextView: TextView
-
+    private lateinit var animacion : ImageView
     private lateinit var sharedPreferencesManager: SharedPreferencesManager
     private lateinit var btnEdit: Button
     private lateinit var btnDelete: Button
@@ -59,7 +61,7 @@ class UserPerfileActivity : AppCompatActivity() {
         usernameTextView = findViewById(R.id.editTextUsername)
         btnEdit = findViewById(R.id.btnUpdatePerfile)
         btnDelete = findViewById(R.id.btnEliminarPerfile)
-
+        animacion = findViewById(R.id.imageViewCarga)
         btnEdit.setOnClickListener {
             val intent = Intent(applicationContext, UpdatePerfileActivity::class.java)
             startActivity(intent)
@@ -83,6 +85,10 @@ class UserPerfileActivity : AppCompatActivity() {
             val api = RetrofitInstance.api
 
             CoroutineScope(Dispatchers.Main + exceptionHandler).launch {
+                Glide.with(applicationContext)
+                    .asGif()
+                    .load(R.drawable.loading)
+                    .into(animacion)
                 try {
                     // Hacer la llamada a la API con el token en el encabezado de autorización
                     val response: Response<AutoResponses<Usuario>> =
@@ -122,6 +128,9 @@ class UserPerfileActivity : AppCompatActivity() {
                     }
                 } catch (e: Exception) {
                     Log.e("UserPerfileFragment", "Error al realizar la llamada a la API", e)
+                } finally {
+                    // Ocultar animación de carga después de completar la operación
+                    animacion.visibility = View.GONE
                 }
             }
         }
@@ -167,6 +176,7 @@ class UserPerfileActivity : AppCompatActivity() {
             val api = RetrofitInstance.api
 
             CoroutineScope(Dispatchers.Main + exceptionHandler).launch {
+                animacion.visibility = View.VISIBLE
                 try {
                     // Hacer la llamada a la API con el token en el encabezado de autorización
                     val response: Response<AutoResponses<Usuario>> = api.eliminarUsuario()
@@ -186,6 +196,9 @@ class UserPerfileActivity : AppCompatActivity() {
                 } catch (e: Exception) {
                     // Manejar cualquier excepción
                     Toast.makeText(applicationContext, "rror al eliminar el usuario", Toast.LENGTH_SHORT).show()
+                } finally {
+                    // Ocultar animación de carga después de completar la operación
+                    animacion.visibility = View.GONE
                 }
             }
         }

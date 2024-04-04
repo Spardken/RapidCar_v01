@@ -22,7 +22,7 @@ class DashboardFragment : Fragment() {
 
     private lateinit var adapterAutoVenta: Adapter_List_Auto_Venta
 
-    private var dataList: List<DataAuto> = emptyList()
+    //private var dataList: List<DataAuto> = emptyList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

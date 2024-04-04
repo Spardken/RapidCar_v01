@@ -29,6 +29,8 @@ class DetalleAutoActivity : AppCompatActivity() {
     private lateinit var paisTextView: TextView
     private lateinit var precioTextView: TextView
     private lateinit var viewPager: ViewPager2
+    private lateinit var idAutoTextView: TextView
+    private lateinit var usernameSellerTextView: TextView
 
     private lateinit var apiInterface: ApiInterface
 
@@ -40,6 +42,8 @@ class DetalleAutoActivity : AppCompatActivity() {
         apiInterface = RetrofitInstance.api
 
         // Inicializar las vistas
+        idAutoTextView= findViewById(R.id.textViewIdAuto)
+        usernameSellerTextView = findViewById(R.id.textViewUsernameSeller)
         descripcionTextView = findViewById(R.id.textViewDescripcion)
         estadoTextView = findViewById(R.id.textViewEstado)
         kilometrajeTextView = findViewById(R.id.textViewKilometraje)
@@ -49,6 +53,7 @@ class DetalleAutoActivity : AppCompatActivity() {
         paisTextView = findViewById(R.id.textViewPais)
         precioTextView = findViewById(R.id.textViewPrecio)
         viewPager = findViewById(R.id.viewPager)
+
 
         val idAuto = Adapter_Auto.getSelectedAutoId()
         Log.e("idAuto", "idAuto traido es: " + idAuto.toString())
@@ -125,6 +130,9 @@ class DetalleAutoActivity : AppCompatActivity() {
         auto ?: return // Verificar si el objeto DataAuto es nulo
 
         // Llenar las vistas con los datos del auto
+
+        idAutoTextView.text = "ID Auto: ${auto.idAuto}"
+        usernameSellerTextView.text = "Vendedor Username: ${auto.idUsuario?.username}"
         descripcionTextView.text = "Descripción: ${auto.descripcion}"
         estadoTextView.text = "Estado: ${auto.estado}"
         kilometrajeTextView.text = "Kilometraje: ${auto.kilometraje}"

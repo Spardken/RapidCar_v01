@@ -5,7 +5,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -18,13 +19,13 @@
         android:theme="@style/Theme.RapidCar_v01"
         tools:targetApi="31">
         <activity
-            android:name=".view.profileButton.UpdatePerfileActivity"
-            android:exported="false" />
-        <activity
             android:name=".view.dashboardButton.MensajesLeadsActivity"
             android:exported="false" />
         <activity
-            android:name=".view.fragments.UserPerfileFragment"
+            android:name=".view.profileButton.UserPerfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.profileButton.UpdatePerfileActivity"
             android:exported="false" />
         <activity
             android:name=".view.dashboardButton.AgregarActualizarAutoActivity"
@@ -46,10 +47,13 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
+        </activity>
+
+        <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-9143714848654139~6890520365" />
+            android:value="ca-app-pub-9143714848654139~6890520365"/>
+        <!-- ... -->
     </application>
 
 </manifest>

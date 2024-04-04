@@ -1,4 +1,4 @@
-package com.example.rapidcar_v01.view.fragments
+package com.example.rapidcar_v01.view.profileButton
 
 import HomeFragment
 import android.content.Intent
@@ -26,7 +26,7 @@ import kotlinx.coroutines.launch
 import retrofit2.Response
 
 
-class UserPerfileFragment : AppCompatActivity() {
+class UserPerfileActivity : AppCompatActivity() {
 
     private lateinit var img: ImageView
     private lateinit var nombreTextView: TextView
@@ -43,7 +43,7 @@ class UserPerfileFragment : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_user_perfile_fragment)
+        setContentView(R.layout.activity_user_perfile_activity)
 
         // Inicializa RetrofitInstance aquí
         RetrofitInstance.initialize(this)
@@ -185,7 +185,7 @@ class UserPerfileFragment : AppCompatActivity() {
                     }
                 } catch (e: Exception) {
                     // Manejar cualquier excepción
-                    Toast.makeText(applicationContext, "Error al eliminar el usuario", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, "rror al eliminar el usuario", Toast.LENGTH_SHORT).show()
                 }
             }
         }

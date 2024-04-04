@@ -91,6 +91,8 @@ import com.example.rapidcar_v01.databinding.FragmentProfileBinding
 import com.example.rapidcar_v01.view.profileButton.LoginActivity
 import com.example.rapidcar_v01.tokenmanager.SharedPreferencesManager
 import android.content.SharedPreferences
+import com.example.rapidcar_v01.view.profileButton.ReclamosSugerenciasActivity
+import com.example.rapidcar_v01.view.profileButton.UserPerfileActivity
 
 class ProfileFragment : Fragment() {
 
@@ -113,9 +115,11 @@ class ProfileFragment : Fragment() {
 
 
         binding.btnEditarProfile.setOnClickListener{
-            val intent = Intent(activity,UserPerfileFragment::class.java)
+            val intent = Intent(activity, UserPerfileActivity::class.java)
             startActivity(intent)
         }
+
+
         // Actualizar la visibilidad de los TextViews basado en si el token es nulo o no
         fun updateTextViews() {
             _binding?.let {
@@ -149,6 +153,10 @@ class ProfileFragment : Fragment() {
             val LoginActivity = Intent(activity, LoginActivity::class.java)
             startActivity(LoginActivity)
         }
+
+        binding.btnReclamosSugerencias.setOnClickListener {
+            val intent = Intent(activity, ReclamosSugerenciasActivity::class.java)
+            startActivity(intent)}
     }
 
     override fun onDestroyView() {

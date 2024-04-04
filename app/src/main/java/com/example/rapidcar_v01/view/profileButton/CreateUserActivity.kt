@@ -63,6 +63,9 @@ class CreateUserActivity : AppCompatActivity() {
 
         apiInterface = RetrofitInstance.api
 
+        // Inicializa RetrofitInstance aquí
+        RetrofitInstance.initialize(this)
+
         val buttonSelectImage = findViewById<Button>(R.id.buttonSelectImageNewUser)
         buttonSelectImage.setOnClickListener {
             if (ContextCompat.checkSelfPermission(

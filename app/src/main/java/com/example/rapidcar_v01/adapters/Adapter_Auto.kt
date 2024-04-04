@@ -90,6 +90,7 @@ class Adapter_Auto(private var data: List<DataAuto>, private val context: Contex
                     })
                     .into(autoImageView)
 
+
                 modeloTextView.text = "Modelo: ${item.modelo}"
                 kilometrajeTextView.text = "Km: ${item.kilometraje}"
                 marcaTextView.text = "Marca: ${item.marca}"

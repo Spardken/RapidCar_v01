@@ -4,6 +4,8 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -14,12 +16,16 @@ import com.example.rapidcar_v01.adapters.ImageCarruselAdapterList
 import com.example.rapidcar_v01.api.ApiInterface
 import com.example.rapidcar_v01.modelo.AutoResponses
 import com.example.rapidcar_v01.modelo.DataAuto
+import com.example.rapidcar_v01.tokenmanager.SharedPreferencesManager
 import com.example.rapidcar_v01.utils.RetrofitInstance
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody
 
 class DetalleAutoActivity : AppCompatActivity() {
 
@@ -36,19 +42,28 @@ class DetalleAutoActivity : AppCompatActivity() {
     private lateinit var idAutoTextView: TextView
     private lateinit var usernameSellerTextView: TextView
 
-    private lateinit var animacion : ImageView
+    private lateinit var animacion: ImageView
+
+    private lateinit var edtSendMessage: EditText
+    private lateinit var btnSendMessage: Button
 
     private lateinit var apiInterface: ApiInterface
+
+    private lateinit var sharedPreferencesManager: SharedPreferencesManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalle_auto)
 
+        // Inicializar SharedPreferencesManager
+        sharedPreferencesManager = SharedPreferencesManager(this)
+
+
         // Inicializar la instancia de la interfaz API utilizando RetrofitInstance
         apiInterface = RetrofitInstance.api
 
         // Inicializar las vistas
-        idAutoTextView= findViewById(R.id.textViewIdAuto)
+        idAutoTextView = findViewById(R.id.textViewIdAuto)
         usernameSellerTextView = findViewById(R.id.textViewUsernameSeller)
         descripcionTextView = findViewById(R.id.textViewDescripcion)
         estadoTextView = findViewById(R.id.textViewEstado)
@@ -61,6 +76,8 @@ class DetalleAutoActivity : AppCompatActivity() {
         viewPager = findViewById(R.id.viewPager)
         animacion = findViewById(R.id.imageViewCarga)
 
+        edtSendMessage = findViewById(R.id.edtSendMessage)
+        btnSendMessage = findViewById(R.id.btnSendMessage)
 
 
         val idAuto = Adapter_Auto.getSelectedAutoId()
@@ -127,6 +144,33 @@ class DetalleAutoActivity : AppCompatActivity() {
                 animacion.visibility = View.GONE
             }
         }
+
+
+
+
+        btnSendMessage.setOnClickListener {
+            val descripcion = edtSendMessage.text.toString()
+            if (descripcion.isNotEmpty()) {
+                val idAuto = Adapter_Auto.getSelectedAutoId()
+                CoroutineScope(Dispatchers.IO).launch {
+                    val requestBody =
+                        RequestBody.create("text/plain".toMediaTypeOrNull(), descripcion)
+                    val response = apiInterface.MensajeCompra(idAuto, requestBody).execute()
+                    if (response.isSuccessful) {
+                        Log.d("DetalleAutoActivity", "Mensaje enviado correctamente")
+                    } else {
+                        Log.e(
+                            "DetalleAutoActivity",
+                            "Error al enviar el mensaje: ${response.errorBody()?.string()}"
+                        )
+                    }
+                }
+            } else {
+                Log.e("DetalleAutoActivity", "El campo de mensaje está vacío")
+            }
+        }
+
+
     }
 
     private fun printAutoDetails(auto: DataAuto?) {

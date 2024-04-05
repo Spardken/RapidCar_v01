@@ -4,6 +4,7 @@ import com.example.rapidcar_v01.modelo.AutoE
 import com.example.rapidcar_v01.modelo.AutoResponse
 import com.example.rapidcar_v01.modelo.AutoResponses
 import com.example.rapidcar_v01.modelo.AutoResponsesList
+import com.example.rapidcar_v01.modelo.ClienteResponse
 import com.example.rapidcar_v01.modelo.DataAuto
 import com.example.rapidcar_v01.modelo.IdCategoria
 import com.example.rapidcar_v01.modelo.Idusuario
@@ -46,7 +47,6 @@ interface ApiInterface {
     ): Call<Void>
 
 
-
     @Multipart
     @PUT("usuario/actualizar_usuario")
     fun ActualizarUsuario(
@@ -69,8 +69,9 @@ interface ApiInterface {
     //lista todas las categorias para ser usadas en el spinner
     @GET("categoria")
     suspend fun getCategorias(): Response<Categoria_auto>
+
     @GET("usuario/buscar_usuario")
-    suspend fun getusuario() : Response<AutoResponses<Usuario>>
+    suspend fun getusuario(): Response<AutoResponses<Usuario>>
 
     @GET("auto/busqueda/categoria")
     suspend fun getAutosPorCategoria(@Query("id") idCategoria: Int):
@@ -109,7 +110,25 @@ interface ApiInterface {
     @DELETE("usuario/eliminar_usuario")
     suspend fun eliminarUsuario(): Response<AutoResponses<Usuario>>
 
+    @Multipart
+    @POST("reclamos_sugerencias/registrar_reclamo_sugerencia")
+    fun ReclamoSugerencia(
+        @Part("mensaje") mensaje: RequestBody,
+        @Part img: MultipartBody.Part?
+    ): Call<Void>
 
+
+    //listar Mensajes de Leads (inbox)
+    @GET("cliente/listar_por_receptor")
+    suspend fun getClientes(): Response<ClienteResponse>
+
+
+    @Multipart
+    @POST("cliente/contactar_usuario")
+    fun MensajeCompra(
+        @Query("id") id: Int,
+        @Part("descripcion") descripcion: RequestBody
+    ): Call<Void>
 
 
 }

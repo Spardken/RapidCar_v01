@@ -86,7 +86,7 @@ class Adapter_List_Auto_Venta(private val context: Context) :
                     })
                     .into(binding.autoImageViewVenta)
 
-                binding.modeloTextViewVenta.text = "Modelo: ${item.modelo}"
+                binding.IdAutoTextViewVenta.text = "ID Auto: ${item.idAuto}"
                 binding.kilometrajeTextViewVenta.text = "Km: ${item.kilometraje}"
                 binding.marcaTextViewVenta.text = "Marca: ${item.marca}"
                 binding.precioTextViewVenta.text = "Precio: ${item.precio}"

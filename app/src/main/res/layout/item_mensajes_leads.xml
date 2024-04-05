@@ -8,7 +8,7 @@
         android:padding="5dp">
 
         <ImageView
-            android:id="@+id/autoImageViewVenta"
+            android:id="@+id/imagenComprador"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:scaleType="centerCrop"
@@ -23,41 +23,61 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/IdAutoTextViewVenta"
+                android:id="@+id/tvUsernameComprador"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="ID Auto: "
-                android:textColor="#FFFFFF"
-                android:textSize="18sp"
+                android:text="Username del Interesado: "
+                android:textColor="#000000"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/kilometrajeTextViewVenta"
+                android:id="@+id/tvCelularComprador"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Kilometraje: "
-                android:textColor="#FFFFFF"
+                android:text="Celular:"
+                android:textColor="#000000"
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/marcaTextViewVenta"
+                android:id="@+id/tvEmailComprador"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Marca: "
-                android:textColor="#FFFFFF"
+                android:text="Email: "
+                android:textColor="#000000"
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/precioTextViewVenta"
+                android:id="@+id/idAutoInteresadoTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Precio: "
-                android:textColor="#FFFFFF"
+                android:text="ID de auto interesado: "
+                android:textColor="#000000"
                 android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/mensajeCompradorTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Mensaje del comprador: "
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <!--<TextView
+                android:id="@+id/mensajeUsuarioTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/rounded_corner_background"
+                android:padding="0dp"
+                android:text="Mensaje del usuario"
+                android:textColor="#000000"
+                android:textSize="16sp" />-->
 
 
             <!-- Agrega más TextViews según sea necesario para mostrar más información -->

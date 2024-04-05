@@ -203,34 +203,7 @@ class CreateUserActivity : AppCompatActivity() {
         resultLauncher.launch(intent)
     }
 
-    /*private fun createMultipartBody(img: MultipartBody.Part?): MultipartBody {
-        val builder = MultipartBody.Builder()
-            .setType(MultipartBody.FORM)
-            .addFormDataPart("nombre", usuario.nombre)
-            .addFormDataPart("apellido_Paterno", usuario.apellido_Paterno)
-            .addFormDataPart("apellido_Materno", usuario.apellido_Materno)
-            .addFormDataPart("correo_electronico", usuario.correoElectronico)
-            .addFormDataPart("celular", usuario.celular.toString())
-            .addFormDataPart("pais", usuario.pais)
-            .addFormDataPart("username", usuario.username)
-            .addFormDataPart("contrasena", usuario.contrasena)
 
-        // Check if an image was selected
-        if (img != null) {
-            builder.addPart(img)
-        }
-
-        return builder.build()
-    }*/
-
-    /*private fun getRealPathFromURI(uri: Uri): String? {
-        val cursor = contentResolver.query(uri, null, null, null, null)
-        cursor?.moveToFirst()
-        val columnIndex = cursor?.getColumnIndex(MediaStore.Images.Media.DATA)
-        val filePath = columnIndex?.let { cursor.getString(it) }
-        cursor?.close()
-        return filePath
-    }*/
 
     private fun registrarUsuario(usuario: Idusuario, img: MultipartBody.Part?) {
         animacion.visibility = View.VISIBLE

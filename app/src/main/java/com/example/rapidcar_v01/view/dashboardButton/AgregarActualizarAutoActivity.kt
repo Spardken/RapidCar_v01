@@ -76,7 +76,7 @@ class AgregarActualizarAutoActivity : AppCompatActivity() {
 
         sharedPreferencesManager = SharedPreferencesManager(this)
 
-        // Configuración de spinners y botones
+        //setup botones y spinners
         setupSpinners()
         setupButtons()
     }
@@ -240,10 +240,10 @@ class AgregarActualizarAutoActivity : AppCompatActivity() {
                         idCategoria,
                         modelo,
                         estatus
-                        //"Bearer $token"  // Aquí ya no es necesario agregar el token manualmente
+
                     )
 
-                    // Log después de hacer la solicitud
+                    //Log después de hacer la solicitud
                     Log.d(TAG, "Solicitud de registro de auto completada.")
 
                     if (response.isSuccessful) {
@@ -261,7 +261,6 @@ class AgregarActualizarAutoActivity : AppCompatActivity() {
                         showToast("..........Error al registrar el auto..........: ${response.message()}")
                     }
                 } catch (e: Exception) {
-                    // Log en caso de error
                     Log.e(
                         TAG,
                         ".............Error al registrar el auto..............>>>>>: ${e.message}",

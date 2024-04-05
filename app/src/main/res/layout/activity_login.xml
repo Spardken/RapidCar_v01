@@ -60,7 +60,7 @@
         android:id="@+id/btnLogin"
         android:layout_width="348dp"
         android:layout_height="51dp"
-        android:text="Inciar Sesison"
+        android:text="Inciar Sesion"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.523"

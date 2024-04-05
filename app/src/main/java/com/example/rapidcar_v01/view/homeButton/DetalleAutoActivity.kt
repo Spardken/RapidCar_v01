@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
@@ -85,12 +86,12 @@ class DetalleAutoActivity : AppCompatActivity() {
 
         Log.d("DetalleAutoActivity", "ID del auto seleccionado: $idAuto")
 
-        // Definir un manejador de excepciones para manejar los errores de la coroutine
+        //Definir un manejador de excepciones para manejar los errores de la coroutine
         val exceptionHandler = CoroutineExceptionHandler { _, exception ->
             Log.e("DetalleAutoActivity", "Error en la coroutine", exception)
         }
 
-        // Llamar al método getAutoDetails dentro de una coroutine
+        //Llamar al método getAutoDetails dentro de una coroutine
         CoroutineScope(Dispatchers.Main + exceptionHandler).launch {
             // Mostrar animación de carga al inicio de la operación
             Glide.with(applicationContext)
@@ -149,32 +150,42 @@ class DetalleAutoActivity : AppCompatActivity() {
 
 
         btnSendMessage.setOnClickListener {
-            val descripcion = edtSendMessage.text.toString()
-            if (descripcion.isNotEmpty()) {
-                val idAuto = Adapter_Auto.getSelectedAutoId()
-                CoroutineScope(Dispatchers.IO).launch {
-                    val requestBody =
-                        RequestBody.create("text/plain".toMediaTypeOrNull(), descripcion)
-                    val response = apiInterface.MensajeCompra(idAuto, requestBody).execute()
-                    if (response.isSuccessful) {
-                        Log.d("DetalleAutoActivity", "Mensaje enviado correctamente")
-                    } else {
-                        Log.e(
-                            "DetalleAutoActivity",
-                            "Error al enviar el mensaje: ${response.errorBody()?.string()}"
-                        )
-                    }
+    val descripcion = edtSendMessage.text.toString()
+    if (descripcion.isNotEmpty()) {
+        val idAuto = Adapter_Auto.getSelectedAutoId()
+        CoroutineScope(Dispatchers.IO).launch {
+            val requestBody =
+                RequestBody.create("text/plain".toMediaTypeOrNull(), descripcion)
+            val response = apiInterface.MensajeCompra(idAuto, requestBody).execute()
+            if (response.isSuccessful) {
+                Log.d("DetalleAutoActivity", "Mensaje enviado correctamente")
+                runOnUiThread {
+                    Toast.makeText(this@DetalleAutoActivity,
+                        "Mensaje enviado correctamente", Toast.LENGTH_SHORT).show()
                 }
             } else {
-                Log.e("DetalleAutoActivity", "El campo de mensaje está vacío")
+                Log.e(
+                    "DetalleAutoActivity",
+                    "Error al enviar el mensaje: ${response.errorBody()?.string()}"
+                )
+                runOnUiThread {
+                    Toast.makeText(this@DetalleAutoActivity,
+                        "Error al enviar el mensaje", Toast.LENGTH_SHORT).show()
+                }
             }
         }
+    } else {
+        Log.e("DetalleAutoActivity", "El campo de mensaje está vacío")
+        Toast.makeText(this@DetalleAutoActivity,
+            "El campo de mensaje está vacío", Toast.LENGTH_SHORT).show()
+    }
+}
 
 
     }
 
     private fun printAutoDetails(auto: DataAuto?) {
-        auto ?: return // Verificar si el objeto DataAuto es nulo
+        auto ?: return //Verificar si el objeto DataAuto es nulo
 
         Log.d("DetalleAutoActivity", "Descripción: ${auto.descripcion ?: "No disponible"}")
         Log.d("DetalleAutoActivity", "Estado: ${auto.estado}")
@@ -187,7 +198,7 @@ class DetalleAutoActivity : AppCompatActivity() {
     }
 
     private fun fillAutoDetails(auto: DataAuto?) {
-        auto ?: return // Verificar si el objeto DataAuto es nulo
+        auto ?: return //Verificar si el objeto DataAuto es nulo
 
         // Llenar las vistas con los datos del auto
 
@@ -204,10 +215,10 @@ class DetalleAutoActivity : AppCompatActivity() {
     }
 
     private fun setupViewPager(auto: DataAuto) {
-        // Crear una lista de cadenas Base64 a partir de las imágenes del auto
+        //Crear una lista de cadenas Base64 a partir de las imágenes del auto
         val imageBase64Strings = listOfNotNull(auto.img1, auto.img2, auto.img3, auto.img4)
 
-        // Configurar el adaptador del ViewPager2 con las imágenes
+        //Configurar el adaptador del ViewPager2 con las imágenes
         val adapter = ImageCarruselAdapterList(this, imageBase64Strings)
         viewPager.adapter = adapter
     }

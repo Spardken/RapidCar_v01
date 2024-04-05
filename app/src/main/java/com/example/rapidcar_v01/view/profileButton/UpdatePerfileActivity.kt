@@ -67,9 +67,9 @@ class UpdatePerfileActivity : AppCompatActivity() {
                 if (data != null) {
                     val imageUri: Uri? = data.data
                     if (imageUri != null) {
-                        // Image selected successfully, you can use 'imageUri' as needed
+                        //Image selected successfully, you can use 'imageUri' as needed
                         selectedImageUri = imageUri
-                        // You can also update the image view if necessary
+                        //You can also update the image view if necessary
                         val imageViewFotoPerfil =
                             findViewById<ImageView>(R.id.ImgUserUpdate)
                         imageViewFotoPerfil.setImageURI(imageUri)
@@ -123,7 +123,7 @@ class UpdatePerfileActivity : AppCompatActivity() {
             Log.e("UserPerfile", "Error en la coroutine", exception)
         }
 
-        // Obtener el token de SharedPreferencesManager
+        //Obtener el token de SharedPreferencesManager
         val token = sharedPreferencesManager.fetchAuthToken()
 
         if (token != null) {
@@ -135,7 +135,7 @@ class UpdatePerfileActivity : AppCompatActivity() {
                     .load(R.drawable.loading)
                     .into(animacion)
                 try {
-                    // Hacer la llamada a la API con el token en el encabezado de autorización
+                    //Hacer la llamada a la API con el token en el encabezado de autorización
                     val response: Response<AutoResponses<Usuario>> =
                         api.getusuario()
 
@@ -146,16 +146,15 @@ class UpdatePerfileActivity : AppCompatActivity() {
                             val selectedUser: Usuario? = userResponses.data
 
                             if (selectedUser != null) {
-                                // Imprimir la respuesta completa de la API en la consola
+                                //Imprimir la respuesta completa de la API en la consola
                                 Log.d("UserPerfilFragment", "Respuesta de la API: $userResponses")
 
-                                // Imprimir los datos del usuario en la consola
+                                //Imprimir los datos del usuario en la consola
                                 Log.d("UserPerfilFragment", "Datos del Usuario: $selectedUser")
 
                                 fillUserDetails(selectedUser)
                                 setupViewPager(selectedUser)
                             } else {
-                                // Manejar el caso de datos nulos
                             }
                         } else {
                             Log.e(
@@ -172,7 +171,7 @@ class UpdatePerfileActivity : AppCompatActivity() {
                 } catch (e: Exception) {
                     Log.e("UserPerfileFragment", "Error al realizar la llamada a la API", e)
                 } finally {
-                    // Ocultar animación de carga después de completar la operación
+                    //Ocultar animación de carga después de completar la operación
                     animacion.visibility = View.GONE
                 }
             }
@@ -192,12 +191,12 @@ class UpdatePerfileActivity : AppCompatActivity() {
     }
 
     private fun setupViewPager(user: Usuario) {
-        // Decodificar la imagen en Base64
+        //Decodificar la imagen en Base64
         val decodedImageBytes = Base64.decode(user.img, Base64.DEFAULT)
         val decodedBitmap =
             BitmapFactory.decodeByteArray(decodedImageBytes, 0, decodedImageBytes.size)
 
-        // Establecer la imagen decodificada en el ImageView
+        //Establecer la imagen decodificada en el ImageView
         img.setImageBitmap(decodedBitmap)
     }
 
@@ -218,15 +217,14 @@ class UpdatePerfileActivity : AppCompatActivity() {
         )
 
 
-        // Check if an image has been selected
-        // Check if an image has been selected
+
         if (selectedImageUri != null) {
-            // Get the bitmap of the selected file
+            //Get the bitmap of the selected file
             var bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, selectedImageUri)
 
-            // Reduce the size of the image
+            //Reduce the size of the image
             val maxImageSize =
-                1024 // Maximum dimension (height or width) of the resized image in pixels
+                1024
             val scaleFactor = maxImageSize.toDouble() / maxOf(bitmap.width, bitmap.height)
             val newWidth = (bitmap.width * scaleFactor).toInt()
             val newHeight = (bitmap.height * scaleFactor).toInt()
@@ -314,7 +312,7 @@ class UpdatePerfileActivity : AppCompatActivity() {
         Log.d("API_REQUEST", "Contraseña: ${usuario.contrasena}")
 
 
-        // Obtener el token de SharedPreferencesManager
+        //Obtener el token de SharedPreferencesManager
         val token = sharedPreferencesManager.fetchAuthToken()
 
         if (token != null) {
@@ -377,3 +375,4 @@ class UpdatePerfileActivity : AppCompatActivity() {
         private const val PERMISSION_REQUEST_READ_EXTERNAL_STORAGE = 1
     }
 }
+

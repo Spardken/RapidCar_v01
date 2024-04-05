@@ -29,16 +29,14 @@ class LoginActivity : AppCompatActivity() {
 
         animacion = findViewById(R.id.imageViewCarga)
 
-        //Configura el OnClickListener para el botón de inicio de sesión
         binding.btnLogin.setOnClickListener {
             val username = binding.editTextUsername.text.toString()
             val password = binding.editTextPassword.text.toString()
 
-            //Realiza el inicio de sesión
             loginUser(username, password)
         }
 
-        //Configura el OnClickListener para el TextView para abrir la actividad de registro
+        //Texto de registro new user
         binding.textViewRegister.setOnClickListener {
             val createUserActivity = Intent(this, CreateUserActivity::class.java)
             startActivity(createUserActivity)
@@ -95,9 +93,5 @@ class LoginActivity : AppCompatActivity() {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
-   /* private fun registrarAuto() {
-        // Llamar a la actividad para agregar o actualizar un vehículo
-        val intent = Intent(this, AgregarActualizarAutoActivity::class.java)
-        startActivity(intent)
-    }*/
+
 }

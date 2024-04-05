@@ -47,7 +47,7 @@ class UserPerfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_perfile_activity)
 
-        // Inicializa RetrofitInstance aquí
+        //Inicializa RetrofitInstance aquí
         RetrofitInstance.initialize(this)
 
         sharedPreferencesManager = SharedPreferencesManager(this)
@@ -78,7 +78,7 @@ class UserPerfileActivity : AppCompatActivity() {
             Log.e("UserPerfile", "Error en la coroutine", exception)
         }
 
-        // Obtener el token de SharedPreferencesManager
+        //Obtener el token de SharedPreferencesManager
         val token = sharedPreferencesManager.fetchAuthToken()
 
         if (token != null) {
@@ -90,7 +90,7 @@ class UserPerfileActivity : AppCompatActivity() {
                     .load(R.drawable.loading)
                     .into(animacion)
                 try {
-                    // Hacer la llamada a la API con el token en el encabezado de autorización
+                    //Hacer la llamada a la API con el token en el encabezado de autorización
                     val response: Response<AutoResponses<Usuario>> =
                         api.getusuario()
 
@@ -112,7 +112,7 @@ class UserPerfileActivity : AppCompatActivity() {
                                 fillUserDetails(selectedUser)
                                 setupViewPager(selectedUser)
                             } else {
-                                // Manejar el caso de datos nulos
+                                //Manejar el caso de datos nulos
                             }
                         } else {
                             Log.e(
@@ -136,7 +136,7 @@ class UserPerfileActivity : AppCompatActivity() {
         }
     }
 
-    private fun printUserDetails(user: Usuario) {
+    /*private fun printUserDetails(user: Usuario) {
         user ?: return
         Log.d("DetalleUsuario", "Nombre: ${user.nombre}")
         Log.d("DetalleUsuario", "Apellido Paterno: ${user.apellidoPaterno}")
@@ -144,7 +144,7 @@ class UserPerfileActivity : AppCompatActivity() {
         Log.d("DetalleUsuario", "Correo Electrónico: ${user.correoElectronico}")
         Log.d("DetalleUsuario", "Celular: ${user.celular}")
         Log.d("DetalleUsuario", "Username: ${user.username}")
-    }
+    }*/
 
     private fun fillUserDetails(user: Usuario) {
         nombreTextView.text = "Nombre: ${user.nombre}"
@@ -156,12 +156,12 @@ class UserPerfileActivity : AppCompatActivity() {
     }
 
     private fun setupViewPager(user: Usuario) {
-        // Decodificar la imagen en Base64
+        //Decodificar la imagen en Base64
         val decodedImageBytes = Base64.decode(user.img, Base64.DEFAULT)
         val decodedBitmap =
             BitmapFactory.decodeByteArray(decodedImageBytes, 0, decodedImageBytes.size)
 
-        // Establecer la imagen decodificada en el ImageView
+        //Establecer la imagen decodificada en el ImageView
         img.setImageBitmap(decodedBitmap)
     }
 
@@ -169,7 +169,7 @@ class UserPerfileActivity : AppCompatActivity() {
         val exceptionHandler = CoroutineExceptionHandler { _, exception ->
             Log.e("UserPerfile", "Error en la coroutine", exception)
         }
-        // Obtener el token de SharedPreferencesManager
+        //Obtener el token de SharedPreferencesManager
         val token = sharedPreferencesManager.fetchAuthToken()
 
         if (token != null) {
@@ -178,7 +178,7 @@ class UserPerfileActivity : AppCompatActivity() {
             CoroutineScope(Dispatchers.Main + exceptionHandler).launch {
                 animacion.visibility = View.VISIBLE
                 try {
-                    // Hacer la llamada a la API con el token en el encabezado de autorización
+                    //Hacer la llamada a la API con el token en el encabezado de autorización
                     val response: Response<AutoResponses<Usuario>> = api.eliminarUsuario()
 
                     if (response.isSuccessful) {
@@ -186,18 +186,18 @@ class UserPerfileActivity : AppCompatActivity() {
 
                         if (userResponses != null && userResponses.estado == "OK") {
                             val selectedUser: Usuario? = userResponses.data
-                            // Mostrar un mensaje de éxito
+                            //Mostrar un mensaje de éxito
                             Toast.makeText(applicationContext, "Usuario eliminado correctamente", Toast.LENGTH_SHORT).show()
                         }
                     } else {
-                        // Manejar caso en el que la respuesta no fue exitosa
+                        //Manejar caso en el que la respuesta no fue exitosa
                         Toast.makeText(applicationContext, "No se pudo eliminar el usuario", Toast.LENGTH_SHORT).show()
                     }
                 } catch (e: Exception) {
-                    // Manejar cualquier excepción
+                    //Manejar cualquier excepción
                     Toast.makeText(applicationContext, "rror al eliminar el usuario", Toast.LENGTH_SHORT).show()
                 } finally {
-                    // Ocultar animación de carga después de completar la operación
+                    //Ocultar animación de carga después de completar la operación
                     animacion.visibility = View.GONE
                 }
             }

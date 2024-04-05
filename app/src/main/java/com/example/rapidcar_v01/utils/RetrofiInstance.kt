@@ -12,11 +12,11 @@ object RetrofitInstance {
     private lateinit var sharedPreferencesManager: SharedPreferencesManager
     private var retrofit: Retrofit? = null
 
-    // Método para inicializar Retrofit
+    //Método para inicializar Retrofit
     fun initialize(context: Context) {
         sharedPreferencesManager = SharedPreferencesManager(context)
 
-        // Configurar el interceptor para agregar el token de autorización y realizar el logging
+        //Configurar el interceptor para agregar el token de autorización y realizar el logging
         val client = OkHttpClient.Builder()
             .addInterceptor { chain ->
                 val token = sharedPreferencesManager.fetchAuthToken() ?: ""
@@ -30,15 +30,15 @@ object RetrofitInstance {
             })
             .build()
 
-        // Configurar Retrofit con el cliente personalizado
+        //Configurar Retrofit con el cliente personalizado
         retrofit = Retrofit.Builder()
-            .baseUrl(Utils.BASE) // Asegúrate de tener la URL base definida en Utils.BASE_URL
+            .baseUrl(Utils.BASE)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
 
-    // Proporcionar la instancia de la interfaz de la API
+    //Proporcionar la instancia de la interfaz de la API
     val api: ApiInterface by lazy {
         retrofit?.create(ApiInterface::class.java)
             ?: throw IllegalStateException("Retrofit instance must be initialized before usage")

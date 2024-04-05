@@ -17,12 +17,10 @@ class DashboardFragment : Fragment() {
 
     private var _binding: FragmentDashboardBinding? = null
 
-    //This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
     private lateinit var adapterAutoVenta: Adapter_List_Auto_Venta
 
-    //private var dataList: List<DataAuto> = emptyList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,7 +33,7 @@ class DashboardFragment : Fragment() {
 
     private fun setupRecyclerViewVenta() {
         binding.rvAutoVenta.layoutManager = LinearLayoutManager(requireContext())
-        adapterAutoVenta = Adapter_List_Auto_Venta(requireContext()) // Aquí se pasa el contexto
+        adapterAutoVenta = Adapter_List_Auto_Venta(requireContext())
        binding.rvAutoVenta.adapter = adapterAutoVenta
     }
 
@@ -59,7 +57,5 @@ class DashboardFragment : Fragment() {
         _binding = null
     }
 
-   // private fun actualizarRecyclerViewVenta() {
-       // adapterAutoVenta.updateDataVenta(dataList)
-    //}
+
 }

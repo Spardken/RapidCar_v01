@@ -49,9 +49,9 @@ class CreateUserActivity : AppCompatActivity() {
                 if (data != null) {
                     val imageUri: Uri? = data.data
                     if (imageUri != null) {
-                        // Image selected successfully, you can use 'imageUri' as needed
+
                         selectedImageUri = imageUri
-                        // You can also update the image view if necessary
+
                         val imageViewFotoPerfil =
                             findViewById<ImageView>(R.id.imageViewFotoPerfilNewUser)
                         imageViewFotoPerfil.setImageURI(imageUri)
@@ -68,7 +68,6 @@ class CreateUserActivity : AppCompatActivity() {
 
         animacion = findViewById(R.id.imageViewCarga)
 
-        // Inicializa RetrofitInstance aquí
         RetrofitInstance.initialize(this)
 
         val buttonSelectImage = findViewById<Button>(R.id.buttonSelectImageNewUser)
@@ -100,7 +99,7 @@ class CreateUserActivity : AppCompatActivity() {
     }
 
     private fun createUser() {
-        // Obtain values from EditText and other fields
+
         val nombre = findViewById<EditText>(R.id.editTextNombreNewUser).text.toString()
         val apellidoPaterno =
             findViewById<EditText>(R.id.editTextApellidoPaternoNewUser).text.toString()
@@ -114,10 +113,8 @@ class CreateUserActivity : AppCompatActivity() {
         val contrasena =
             findViewById<EditText>(R.id.editTextContrasenaNewUser).text.toString()
 
-        // Create an IdRol object with the default value
         val idRol = IdRol("Rol Predeterminado", 3)
 
-        // Initialize the usuario variable with the collected information
         usuario = Idusuario(
             apellidoMaterno,
             apellidoPaterno,
@@ -133,15 +130,12 @@ class CreateUserActivity : AppCompatActivity() {
             username
         )
 
-        // Check if an image has been selected
-        // Check if an image has been selected
+
         if (selectedImageUri != null) {
-            // Get the bitmap of the selected file
             var bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, selectedImageUri)
 
-            // Reduce the size of the image
             val maxImageSize =
-                1024 // Maximum dimension (height or width) of the resized image in pixels
+                1024
             val scaleFactor = maxImageSize.toDouble() / maxOf(bitmap.width, bitmap.height)
             val newWidth = (bitmap.width * scaleFactor).toInt()
             val newHeight = (bitmap.height * scaleFactor).toInt()
@@ -152,24 +146,23 @@ class CreateUserActivity : AppCompatActivity() {
                 Bitmap.CompressFormat.JPEG,
                 90,
                 byteArrayOutputStream
-            ) // Changed to JPEG and quality set to 90
+            ) //Changed to JPEG and quality set to 90
             val byteArray = byteArrayOutputStream.toByteArray()
             val base64Image = Base64.encodeToString(byteArray, Base64.DEFAULT)
 
-            // Convert Base64 string back to byte array
+            //Convert Base64 string back to byte array
             val imageBytes = Base64.decode(base64Image, Base64.DEFAULT)
 
-            // Create RequestBody instance from byte array
+            //Create RequestBody instance from byte array
             val imageRequestBody = imageBytes.toRequestBody("image/*".toMediaTypeOrNull())
 
-            // Create MultipartBody.Part from RequestBody
+            //Create MultipartBody.Part from RequestBody
             val imagePart = MultipartBody.Part.createFormData("img", "avatar.jpg", imageRequestBody)
 
-            // Call the function that makes the API call
+            //Call the function that makes the API call
             registrarUsuario(usuario, imagePart)
         } else {
-            // If no image selected, create a multipart body without image
-            // Call the function that makes the API call
+
             registrarUsuario(usuario, null)
         }
     }
@@ -190,7 +183,7 @@ class CreateUserActivity : AppCompatActivity() {
                         "Permiso denegado. Necesitamos el permiso para seleccionar una imagen de la galería.",
                         Toast.LENGTH_LONG
                     ).show()
-                    // Disable the button if the permission is denied
+                    //Disable the button if the permission is denied
                     val buttonSelectImage = findViewById<Button>(R.id.buttonSelectImageNewUser)
                     buttonSelectImage.isEnabled = false
                 }
@@ -207,7 +200,6 @@ class CreateUserActivity : AppCompatActivity() {
 
     private fun registrarUsuario(usuario: Idusuario, img: MultipartBody.Part?) {
         animacion.visibility = View.VISIBLE
-        // Log user fields
         Log.d("API_REQUEST", "Usuario: $usuario")
         Log.d("API_REQUEST", "Nombre: ${usuario.nombre}")
         Log.d("API_REQUEST", "Apellido Paterno: ${usuario.apellido_Paterno}")
@@ -218,10 +210,9 @@ class CreateUserActivity : AppCompatActivity() {
         Log.d("API_REQUEST", "Username: ${usuario.username}")
         Log.d("API_REQUEST", "Contraseña: ${usuario.contrasena}")
 
-        // Create the multipart body
-        //val multipartBody = createMultipartBody(img)
 
-        // Make the API call
+
+        //API call
         val call = apiInterface.registrarUsuario(
             img,
             usuario.nombre.toRequestBody("text/plain".toMediaTypeOrNull()),
@@ -234,13 +225,12 @@ class CreateUserActivity : AppCompatActivity() {
             usuario.pais.toRequestBody("text/plain".toMediaTypeOrNull())
         )
 
-        // Log URL, method, headers, and request body
         Log.d("API_REQUEST", "URL: ${call.request().url}")
         Log.d("API_REQUEST", "Method: ${call.request().method}")
         Log.d("API_REQUEST", "Headers: ${call.request().headers}")
         Log.d("API_REQUEST", "Body: ${call.request().body}")
 
-        // Handle API response
+        //Handle API response
         call.enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 if (response.isSuccessful) {
@@ -275,7 +265,7 @@ class CreateUserActivity : AppCompatActivity() {
                     animacion.visibility = View.GONE
                 }
 
-                // Show a Toast with the error message
+                //Show a Toast with the error message
                 Toast.makeText(
                     this@CreateUserActivity,
                     "Error al enviar la petición: ${t.message}",
@@ -286,12 +276,7 @@ class CreateUserActivity : AppCompatActivity() {
         })
     }
 
-    /*private fun createImagePart(imagenRequestBody: okhttp3.RequestBody?): MultipartBody.Part? {
-        if (imagenRequestBody != null) {
-            return MultipartBody.Part.createFormData("img", "avatar.jpg", imagenRequestBody)
-        }
-        return null
-    }*/
+
 
     companion object {
         private const val PERMISSION_REQUEST_READ_EXTERNAL_STORAGE = 1
